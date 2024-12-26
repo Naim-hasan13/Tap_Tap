@@ -4,7 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AlphaAnimation
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.taptap.sponsorle.databinding.ActivityScratchBinding
 
 class ScratchActivity : AppCompatActivity() {
@@ -16,7 +19,14 @@ class ScratchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityScratchBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        enableEdgeToEdge()
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            val insetsController = ViewCompat.getWindowInsetsController(v)
+            insetsController?.isAppearanceLightStatusBars = true
+            insets
+        }
         setupScratchCard()
         setupAddToWalletButton()
     }
