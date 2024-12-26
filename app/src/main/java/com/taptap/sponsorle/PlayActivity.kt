@@ -1,20 +1,13 @@
 package com.taptap.sponsorle
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.taptap.sponsorle.databinding.ActivityPlayBinding
+import com.taptap.sponsorle.extrazz.TinyDB
 
 class PlayActivity : AppCompatActivity() {
 
@@ -29,24 +22,14 @@ class PlayActivity : AppCompatActivity() {
         binding = ActivityPlayBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        enableEdgeToEdge()
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            val insetsController = ViewCompat.getWindowInsetsController(v)
-            insetsController?.isAppearanceLightStatusBars = true
-            insets
-        }
-
         startCountdown()
-        setupTapDetection()
     }
 
     private fun startCountdown() {
         val countdownValues = listOf("3", "2", "1", "Go!")
         var index = 0
 
-        val countdownTimer = object : CountDownTimer(4000, 1000) {
+        val countdownTimer = object : CountDownTimer(3000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 binding.tvCountdown.text = countdownValues[index]
                 index++
@@ -57,6 +40,7 @@ class PlayActivity : AppCompatActivity() {
                 binding.tvCountdown.visibility = View.GONE
                 binding.tvScore.visibility = View.VISIBLE
                 binding.tvTimer.visibility = View.VISIBLE
+                setupTapDetection()
                 startGameTimer()
             }
         }
@@ -121,12 +105,20 @@ class PlayActivity : AppCompatActivity() {
     }
 
 
-
     private fun endGame() {
         timer?.cancel()
-        val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("FINAL_SCORE", score)
-        startActivity(intent)
+        val heightScore = TinyDB.getInt(this, "high", 0)
+        if (heightScore < score) {
+            TinyDB.saveInt(this, "high", score)
+        }
+        TinyDB.saveInt(this, "total_score", TinyDB.getInt(this, "total_score", 0) + score)
+        TinyDB.saveInt(this, "score", score)
+        startActivity(Intent(this, ResultActivity::class.java))
         finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        timer?.cancel()
     }
 }

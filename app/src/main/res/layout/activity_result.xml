@@ -2,129 +2,134 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:background="@color/white"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".ResultActivity">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_30ssp"
-        android:textColor="@color/black"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/_60sdp"
         android:text="High Score"
-        android:textStyle="bold"/>
+        android:textColor="@color/black"
+        android:textSize="@dimen/_30ssp"
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/tv_High_Score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_30ssp"
-        android:textColor="@color/black"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/_5sdp"
         android:text="000"
-        android:textStyle="bold"/>
+        android:textColor="@color/black"
+        android:textSize="@dimen/_30ssp"
+        android:textStyle="bold" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_30ssp"
-        android:textColor="@color/black"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/_10sdp"
         android:text="Your Score"
-        android:textStyle="bold"/>
+        android:textColor="@color/black"
+        android:textSize="@dimen/_30ssp"
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/tv_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_30ssp"
-        android:textColor="@color/black"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/_5sdp"
         android:text="000"
-        android:textStyle="bold"/>
+        android:textColor="@color/black"
+        android:textSize="@dimen/_30ssp"
+        android:textStyle="bold" />
 
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_2xscore"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_45sdp"
-        android:backgroundTint="@color/white"
-        app:strokeWidth="1dp"
+        android:layout_gravity="center"
         android:layout_marginTop="@dimen/_35sdp"
         android:layout_marginBottom="@dimen/_20sdp"
-        android:layout_gravity="center"
-        app:strokeColor="@color/black"
+        android:backgroundTint="@color/white"
         android:gravity="center"
         android:orientation="vertical"
+        app:strokeColor="@color/black"
+        app:strokeWidth="1dp"
 
         >
-
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="@dimen/_10sdp"
             android:gravity="center_vertical"
-            >
+            android:orientation="horizontal"
+            android:padding="@dimen/_10sdp">
+
             <ImageView
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:src="@drawable/ad"/>
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:padding="@dimen/_1sdp"
+                android:src="@drawable/ad" />
 
             <TextView
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="2X Score"
-                android:layout_marginTop="@dimen/_minus2sdp"
                 android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_minus2sdp"
+                android:text="2X Score"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_22ssp"
+                android:textSize="@dimen/_20ssp"
                 android:textStyle="bold" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_Retry"
         android:layout_width="@dimen/_140sdp"
         android:layout_height="@dimen/_45sdp"
-        android:backgroundTint="@color/white"
-        app:strokeWidth="1dp"
         android:layout_gravity="center"
-        app:strokeColor="@color/black"
+        android:backgroundTint="@color/white"
         android:gravity="center"
         android:orientation="vertical"
+        app:strokeColor="@color/black"
+        app:strokeWidth="1dp"
 
         >
-
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
             android:gravity="center_vertical"
-            >
+            android:orientation="horizontal">
+
             <ImageView
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:padding="@dimen/_1sdp"
                 android:layout_marginStart="@dimen/_20sdp"
-                android:src="@drawable/rotate"/>
+                android:src="@drawable/rotate" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Retry"
                 android:layout_marginStart="@dimen/_15sdp"
+                android:text="Retry"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_22ssp"
+                android:textSize="@dimen/_20ssp"
                 android:textStyle="bold" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

@@ -44,7 +44,7 @@
                 android:src="@drawable/cup"/>
 
             <TextView
-                android:id="@+id/tv_refer_link"
+                android:id="@+id/tv_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -66,7 +66,7 @@
         android:text="High Score"
         android:textStyle="bold"/>
     <TextView
-        android:id="@+id/tv_count"
+        android:id="@+id/tv_highest_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/_30ssp"

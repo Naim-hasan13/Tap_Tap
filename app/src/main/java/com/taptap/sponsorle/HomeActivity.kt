@@ -2,13 +2,12 @@ package com.taptap.sponsorle
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.taptap.sponsorle.databinding.ActivityHomeBinding
-import com.taptap.sponsorle.databinding.ActivityPlayBinding
+import com.taptap.sponsorle.extrazz.TinyDB
 
 class HomeActivity : AppCompatActivity() {
 
@@ -26,22 +25,26 @@ class HomeActivity : AppCompatActivity() {
             insetsController?.isAppearanceLightStatusBars = true
             insets
         }
+        binding.tvCount.text = TinyDB.getInt(this, "total_score", 0).toString()
+        binding.tvHighestCount.text = TinyDB.getInt(this, "high", 0).toString()
+
         binding.llStart.setOnClickListener {
             val intent = Intent(this, PlayActivity::class.java)
             startActivity(intent)
-            finish()
         }
         binding.cvMenu.setOnClickListener {
-            val intent = Intent(this, MenuActivity::class.java)
-            startActivity(intent)
+            if (TinyDB.getInt(this, "total_score", 0) > 1500) {
+                val intent = Intent(this, MenuActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
+
     override fun onResume() {
         super.onResume()
-        val finalScore = intent.getIntExtra("FINAL_SCORE", 0)
-        if (finalScore > 0) {
-            findViewById<TextView>(R.id.tv_count).text = "Your Score: $finalScore"
-        }
+        binding.tvCount.text = TinyDB.getInt(this, "total_score", 0).toString()
+        binding.tvHighestCount.text = TinyDB.getInt(this, "high", 0).toString()
+
     }
 
 }
