@@ -327,7 +327,7 @@ class MenuActivity : AppCompatActivity() {
                     TinyDB.saveString(this, "adx_app_id", alldata[11])
                     TinyDB.saveString(this, "adx_inter", alldata[12])
                     TinyDB.saveString(this, "adx_native", alldata[13])
-                    TinyDB.saveString(this, "balance_show_limit", alldata[14])
+                    TinyDB.saveString(this, "balance_exchange_rate", alldata[14])
                     TinyDB.saveString(this, "balance_withdrawal_limit", alldata[15])
                     TinyDB.saveString(this, "adx_banner", alldata[16])
                     TinyDB.saveString(this, "original_play_limit", alldata[17])

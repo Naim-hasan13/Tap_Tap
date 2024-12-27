@@ -95,18 +95,14 @@ class CheckInActivity : AppCompatActivity() {
                     rewardedAd = ad
                     rewardedAd?.let { ad ->
                         Utils.dismissLoadingPopUp()
-                        ad.show(this@CheckInActivity, OnUserEarnedRewardListener { rewardItem ->
-                            // Handle the reward.
-                            val rewardAmount = rewardItem.amount
-                            val rewardType = rewardItem.type
-
-                            ad.fullScreenContentCallback=object : FullScreenContentCallback() {
+                        ad.show(this@CheckInActivity) { rewardItem ->
+                            ad.fullScreenContentCallback = object : FullScreenContentCallback() {
                                 override fun onAdDismissedFullScreenContent() {
                                     super.onAdDismissedFullScreenContent()
                                     addPoint()
                                 }
                             }
-                        })
+                        }
                     } ?: run {
                         loadRewardedAd()
                     }
@@ -116,7 +112,6 @@ class CheckInActivity : AppCompatActivity() {
     }
 
     private fun addPoint() {
-
         val deviceid: String = Settings.Secure.getString(
             contentResolver, Settings.Secure.ANDROID_ID
         )
