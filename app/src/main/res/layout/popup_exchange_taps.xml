@@ -25,7 +25,7 @@
             android:orientation="vertical"
             android:padding="@dimen/_8sdp">
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cv_yt_start"
+                android:id="@+id/cv_close"
                 android:layout_width="@dimen/_70sdp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_45sdp"
