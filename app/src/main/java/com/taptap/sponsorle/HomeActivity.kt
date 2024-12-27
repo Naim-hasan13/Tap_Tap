@@ -2,6 +2,7 @@ package com.taptap.sponsorle
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -33,9 +34,11 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.cvMenu.setOnClickListener {
-            if (TinyDB.getInt(this, "total_score", 0) > 1500) {
+            if (TinyDB.getInt(this, "total_score", 0) > 500) {
                 val intent = Intent(this, MenuActivity::class.java)
                 startActivity(intent)
+            } else {
+                Toast.makeText(this, "Insufficient Coins", Toast.LENGTH_SHORT).show()
             }
         }
     }

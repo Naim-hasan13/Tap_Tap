@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -45,7 +46,6 @@ class ResultActivity : AppCompatActivity() {
         }
         findViewById<MaterialCardView>(R.id.cv_2xscore).setOnClickListener {
             Utils.showLoadingPopUp(this)
-            it.visibility= View.GONE
             loadInterstitial()
         }
     }
@@ -70,14 +70,17 @@ class ResultActivity : AppCompatActivity() {
                     mAdManagerInterstitialAd?.fullScreenContentCallback =
                         object : FullScreenContentCallback() {
                             override fun onAdDismissedFullScreenContent() {
-                                // Reset the ad object and preload a new one
                                 mAdManagerInterstitialAd = null
-                               val score=TinyDB.getInt(this@ResultActivity, "score", 0)*2
-                                TinyDB.saveInt(this@ResultActivity, "total_score", TinyDB.getInt(this@ResultActivity, "total_score", 0) + score)
+                                val score=TinyDB.getInt(this@ResultActivity, "score", 0)*2
+                                TinyDB.saveInt(this@ResultActivity, "total_score", TinyDB.getInt(this@ResultActivity, "total_score", 0)-TinyDB.getInt(this@ResultActivity, "score", 0) + score)
                                 val heightScore = TinyDB.getInt(this@ResultActivity, "high", 0)
                                 if (heightScore < score) {
                                     TinyDB.saveInt(this@ResultActivity, "high", score)
                                 }
+                                Toast.makeText(this@ResultActivity, "2x Score Added", Toast.LENGTH_SHORT)
+                                    .show()
+                                finish()
+
                             }
 
                         }

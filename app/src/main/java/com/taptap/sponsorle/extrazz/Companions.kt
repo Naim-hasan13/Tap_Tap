@@ -16,17 +16,18 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import com.google.android.material.snackbar.Snackbar
 import com.taptap.sponsorle.R
 
 
 object Companions {
-    const val siteUrl = "https://selfapp.earningads.io/v2/"
+    const val siteUrl = "https://selfapp.earningads.io/v3/"
     const val siteAdsUrl = "https://earningads.io/_CustomsAds/"
-    const val ADS_UNIQUE_APP_ID = "slaprun111"
+    const val EARNING_ADS_UNIQUE_APP_ID = "TAPTAP540"
     const val APP_VERSION = 1
-    const val APP_ID = 4
-    const val PUBSCALE_ID = "98889976"
+    const val APP_ID = 1
+    const val PUBSCALE_APP_ID = "92450115"
 }
 
 object Utils {

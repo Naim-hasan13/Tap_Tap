@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Tap Tap</string>
     <string name="interstitial_id">/21775744923/example/interstitial</string>
+    <string name="banner_id">/21775744923/example/fixed-size-banner</string>
+    <string name="native_id">/21775744923/example/native</string>
+    <string name="rewarded">/21775744923/example/rewarded</string>
+
+
 </resources>

@@ -2,43 +2,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:background="@color/white"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".ReferActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/_15sdp"
-
         android:layout_height="wrap_content"
+
+        android:layout_marginTop="@dimen/_15sdp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            app:strokeWidth="@dimen/_1sdp"
             android:layout_marginStart="@dimen/_20sdp"
-
-            app:strokeColor="#c5c5c5"
+            android:backgroundTint="@color/white"
             android:gravity="center"
-            android:orientation="vertical">
+
+            android:orientation="vertical"
+            app:strokeColor="#c5c5c5"
+            app:strokeWidth="@dimen/_1sdp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:padding="@dimen/_8sdp"
                 android:gravity="center_vertical"
-                >
-
+                android:orientation="horizontal"
+                android:padding="@dimen/_8sdp">
 
 
                 <ImageView
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
-                    android:src="@drawable/players"/>
+                    android:src="@drawable/players" />
 
             </LinearLayout>
 
@@ -54,6 +55,7 @@
             android:textSize="@dimen/_20ssp"
             android:textStyle="bold" />
     </LinearLayout>
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,9 +64,9 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:backgroundTint="@color/white"
         android:gravity="center"
-        app:cardCornerRadius="@dimen/_15sdp"
-
         android:orientation="vertical"
+
+        app:cardCornerRadius="@dimen/_15sdp"
         app:strokeColor="#c5c5c5"
         app:strokeWidth="@dimen/_1sdp">
 
@@ -126,30 +128,30 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        app:strokeWidth="@dimen/_1sdp"
         android:layout_gravity="center"
-        app:cardCornerRadius="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
-        app:strokeColor="#c5c5c5"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:backgroundTint="@color/white"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:cardCornerRadius="@dimen/_15sdp"
+        app:strokeColor="#c5c5c5"
+        app:strokeWidth="@dimen/_1sdp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="@dimen/_8sdp"
-            >
+            android:padding="@dimen/_8sdp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_30sdp"
                 android:text="Earn  ₹51 Per Refer"
                 android:textColor="@color/black"
-android:layout_marginBottom="@dimen/_30sdp"
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold" />
 
@@ -157,24 +159,24 @@ android:layout_marginBottom="@dimen/_30sdp"
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
-                    app:cardCornerRadius="@dimen/_20sdp"
                     android:layout_marginStart="@dimen/_10sdp"
                     app:cardBackgroundColor="#644bf6"
+                    app:cardCornerRadius="@dimen/_20sdp"
                     app:strokeWidth="0dp">
-
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -199,23 +201,20 @@ android:layout_marginBottom="@dimen/_30sdp"
             </LinearLayout>
 
 
-
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
-                    app:cardCornerRadius="@dimen/_20sdp"
-                    app:cardBackgroundColor="#644bf6"
                     android:layout_marginStart="@dimen/_10sdp"
+                    app:cardBackgroundColor="#644bf6"
+                    app:cardCornerRadius="@dimen/_20sdp"
 
                     app:strokeWidth="0dp">
 
@@ -248,29 +247,30 @@ android:layout_marginBottom="@dimen/_30sdp"
                     android:textStyle="bold" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginBottom="@dimen/_25sdp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
-                    app:cardCornerRadius="@dimen/_20sdp"
                     android:layout_marginStart="@dimen/_10sdp"
-
                     app:cardBackgroundColor="#644bf6"
-                    app:strokeWidth="0dp">
 
+                    app:cardCornerRadius="@dimen/_20sdp"
+                    app:strokeWidth="0dp">
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -306,9 +306,9 @@ android:layout_marginBottom="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:backgroundTint="@color/white"
         android:gravity="center"
-        app:cardCornerRadius="@dimen/_15sdp"
-
         android:orientation="vertical"
+
+        app:cardCornerRadius="@dimen/_15sdp"
         app:strokeColor="#c5c5c5"
         app:strokeWidth="@dimen/_1sdp">
 
@@ -331,22 +331,23 @@ android:layout_marginBottom="@dimen/_30sdp"
                 android:id="@+id/iv_whatsapp"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_40sdp"
-      android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_17sdp"
 
-      android:src="@drawable/whatsapp" />
+                android:src="@drawable/whatsapp" />
 
             <ImageView
                 android:id="@+id/iv_youtube"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_width="@dimen/_45sdp"
+                android:visibility="gone"
+                android:layout_height="@dimen/_42sdp"
                 android:src="@drawable/youtube1" />
+
 
             <ImageView
                 android:id="@+id/iv_share"
                 android:layout_width="@dimen/_40sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-
                 android:layout_height="@dimen/_40sdp"
+
                 android:src="@drawable/share" />
 
 

@@ -3,101 +3,104 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:orientation="vertical"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
-<LinearLayout
-    android:id="@+id/ll_start"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical"
-    android:gravity="center">
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_menu"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_45sdp"
-        android:backgroundTint="@color/white"
-        app:strokeWidth="1dp"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:layout_marginEnd="@dimen/_15sdp"
-        android:layout_gravity="end"
-        app:strokeColor="@color/black"
+    tools:context=".HomeActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical"
+        android:orientation="vertical">
 
-        >
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:backgroundTint="@color/white"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:strokeColor="@color/black"
+            app:strokeWidth="1dp"
 
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
             >
-            <ImageView
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:src="@drawable/cup"/>
-
-            <TextView
-                android:id="@+id/tv_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Menu"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_22ssp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/_30ssp"
-        android:textColor="@color/black"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/_25sdp"
-        android:text="High Score"
-        android:textStyle="bold"/>
-    <TextView
-        android:id="@+id/tv_highest_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/_30ssp"
-        android:textColor="@color/black"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:text="000"
-        android:textStyle="bold"/>
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieAnimationView"
-        android:layout_width="@dimen/_155sdp"
-        android:layout_height="@dimen/_155sdp"
-        android:layout_marginTop="@dimen/_40sdp"
-
-        app:lottie_autoPlay="true"
-        android:layout_gravity="center"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/animation" />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/_40sdp"
-        android:layout_marginBottom="@dimen/_40sdp"
-        android:text="Tap To Start"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_30ssp"
-        android:textStyle="bold" />
-</LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginStart="@dimen/_13sdp"
+                    android:src="@drawable/cup" />
+
+                <TextView
+                    android:id="@+id/tv_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_19sdp"
+                    android:text="Menu"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_22ssp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:text="High Score"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_30ssp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_highest_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="000"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_30ssp"
+            android:textStyle="bold" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationView"
+            android:layout_width="@dimen/_155sdp"
+            android:layout_height="@dimen/_155sdp"
+            android:layout_gravity="center"
+
+            android:layout_marginTop="@dimen/_40sdp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/animation" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_40sdp"
+            android:text="Tap To Start"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_30ssp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </LinearLayout>

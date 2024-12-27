@@ -16,7 +16,12 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    ndkVersion = "25.2.9519653"
+    externalNativeBuild {
+        ndkBuild {
+            path = file("src/main/jni/Android.mk")
+        }
+    }
     buildTypes {
         release {
             isMinifyEnabled = true
@@ -57,5 +62,13 @@ dependencies {
     implementation("com.google.android.gms:play-services-ads:23.6.0")
     implementation(project(":nativetemplates"))
     implementation("com.android.volley:volley:1.2.1")
+    implementation("com.github.AnupKumarPanwar:ScratchView:1.9.1")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.pubscale.sdkone:offerwall:1.0.7")
+    implementation ("com.github.dhaval2404:imagepicker:2.1")
+
+    implementation ("com.google.android.gms:play-services-mlkit-text-recognition:19.0.0")
+
+
 }

@@ -1,11 +1,21 @@
 package com.taptap.sponsorle
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import com.taptap.sponsorle.databinding.ActivityPlayBinding
 import com.taptap.sponsorle.extrazz.TinyDB
 
@@ -14,7 +24,7 @@ class PlayActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPlayBinding
     private var score = 0
     private var timer: CountDownTimer? = null
-
+    lateinit var countdownTimer: CountDownTimer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,7 +39,7 @@ class PlayActivity : AppCompatActivity() {
         val countdownValues = listOf("3", "2", "1", "Go!")
         var index = 0
 
-        val countdownTimer = object : CountDownTimer(3000, 1000) {
+        countdownTimer = object : CountDownTimer(4000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 binding.tvCountdown.text = countdownValues[index]
                 index++
@@ -40,11 +50,38 @@ class PlayActivity : AppCompatActivity() {
                 binding.tvCountdown.visibility = View.GONE
                 binding.tvScore.visibility = View.VISIBLE
                 binding.tvTimer.visibility = View.VISIBLE
+                binding.llScore.visibility = View.VISIBLE
                 setupTapDetection()
                 startGameTimer()
             }
         }
         countdownTimer.start()
+    }
+
+    fun showBoomImage(q1: FrameLayout, x: Int, y: Int) {
+        // Create a new ImageView for the "Bang" image
+        val wrongImage = ImageView(this)
+        wrongImage.setImageResource(R.drawable.bang) // Set your "bang" image
+
+        // Assign a unique ID to the ImageView
+        val imageViewId = View.generateViewId()
+        wrongImage.id = imageViewId
+
+        // Set the size of the ImageView
+        val params = FrameLayout.LayoutParams(200, 200) // Set size for image
+        wrongImage.layoutParams = params
+
+        // Position the image at the touch coordinates
+        wrongImage.x = x.toFloat() - 100f // Subtract half of the image width for centering
+        wrongImage.y = y.toFloat() - 160f // Subtract half of the image height for centering
+
+        // Add the ImageView to the layout
+        q1.addView(wrongImage)
+
+        // Remove the ImageView after 700 milliseconds
+        Handler(Looper.getMainLooper()).postDelayed({
+            q1.removeView(wrongImage)
+        }, 700)
     }
 
     private fun animateCountdownText() {
@@ -78,15 +115,27 @@ class PlayActivity : AppCompatActivity() {
         timer?.start()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setupTapDetection() {
         binding.playLayout.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 score++
-                binding.tvScore.text = "Score: $score"
+                binding.tvScore.text = "$score"
                 performScreenShrinkAnimation()
+                val coordinates = IntArray(2)
+                binding.playLayout.getLocationOnScreen(coordinates) // Get screen coordinates of the answer ImageView
+
+
+                val touchX = event.rawX.toInt()
+                val touchY = event.rawY.toInt()
+
+                    showBoomImage(binding.playLayout, touchX, touchY)
+
             }
             true
         }
+
+
     }
 
     private fun performScreenShrinkAnimation() {
@@ -120,5 +169,6 @@ class PlayActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         timer?.cancel()
+        countdownTimer.cancel()
     }
 }

@@ -57,21 +57,27 @@
     </LinearLayout>
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_120sdp"
-        android:backgroundTint="@color/white"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        app:strokeWidth="@dimen/_1sdp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="@dimen/_20sdp"
-        app:strokeColor="#c5c5c5"
-        app:cardCornerRadius="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:backgroundTint="@color/white"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:strokeColor="#c5c5c5"
+        app:strokeWidth="@dimen/_1sdp">
 
-
+        <com.google.android.gms.ads.admanager.AdManagerAdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/banner_ad_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_id" />
     </com.google.android.material.card.MaterialCardView>
-
 
     <LinearLayout
         android:id="@+id/ll_spin"
@@ -172,17 +178,21 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_120sdp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-
         android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:backgroundTint="@color/white"
         android:gravity="center"
         android:orientation="vertical"
-        app:cardCornerRadius="@dimen/_15sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
         app:strokeColor="#c5c5c5"
         app:strokeWidth="@dimen/_1sdp">
-
+        <com.google.android.ads.nativetemplates.TemplateView
+            android:id="@+id/my_template"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:gnt_template_type="@layout/gnt_medium_template_view" />
 
     </com.google.android.material.card.MaterialCardView>
 
