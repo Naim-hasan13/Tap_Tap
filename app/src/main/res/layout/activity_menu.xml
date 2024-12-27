@@ -124,6 +124,45 @@
                 android:orientation="vertical"
                 android:visibility="visible">
 
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_Exchange_Taps"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:backgroundTint="@color/white"
+                    android:gravity="center"
+                    android:orientation="vertical"
+
+                    app:cardCornerRadius="@dimen/_15sdp"
+                    app:strokeColor="#c5c5c5"
+                    app:strokeWidth="@dimen/_1sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_8sdp">
+
+                        <ImageView
+                            android:layout_width="@dimen/_35sdp"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:src="@drawable/cup" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Exchange Taps"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_20ssp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_Redeem"
