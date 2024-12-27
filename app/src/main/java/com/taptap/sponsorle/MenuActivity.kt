@@ -10,6 +10,7 @@ import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -57,6 +58,7 @@ class MenuActivity : AppCompatActivity() {
     }
 
     external fun Hatbc(): String
+
     @SuppressLint("HardwareIds")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -146,7 +148,57 @@ class MenuActivity : AppCompatActivity() {
             binding.llRedeem.visibility = View.VISIBLE
             redeemProgress()
         }
+        binding.cvExchangeTaps.setOnClickListener {
+            showExchangePopup()
+        }
         getUserValue()
+        binding.cvHistory.setOnClickListener {
+            val intent = Intent(this, Redeem_HistoryActivity::class.java)
+            startActivity(intent)
+        }
+        binding.cv2000Flams.setOnClickListener {
+            val intent = Intent(this, WithdrawalActivity::class.java)
+            intent.putExtra("coin", "2000")
+            intent.putExtra("type", "UPI")
+            intent.putExtra("title", "₹10")
+            startActivity(intent)
+        }
+        binding.cv2800Flams.setOnClickListener {
+            val intent = Intent(this, WithdrawalActivity::class.java)
+            intent.putExtra("coin", "2800")
+            intent.putExtra("type", "UPI")
+            intent.putExtra("title", "₹30")
+            startActivity(intent)
+        }
+        binding.cv4000Flams.setOnClickListener {
+            val intent = Intent(this, WithdrawalActivity::class.java)
+            intent.putExtra("coin", "4000")
+            intent.putExtra("type", "UPI")
+            intent.putExtra("title", "₹50")
+            startActivity(intent)
+        }
+        binding.cv7500Flams.setOnClickListener {
+            val intent = Intent(this, WithdrawalActivity::class.java)
+            intent.putExtra("coin", "7500")
+            intent.putExtra("type", "UPI")
+            intent.putExtra("title", "₹100")
+            startActivity(intent)
+        }
+        binding.cvAmazon4000Flams.setOnClickListener {
+            val intent = Intent(this, WithdrawalActivity::class.java)
+            intent.putExtra("coin", "4000")
+            intent.putExtra("type", "Amazon")
+            intent.putExtra("title", "₹50")
+            startActivity(intent)
+        }
+        binding.cvAmazon7500Flams.setOnClickListener {
+            val intent = Intent(this, WithdrawalActivity::class.java)
+            intent.putExtra("coin", "7500")
+            intent.putExtra("type", "Amazon")
+            intent.putExtra("title", "₹100")
+            startActivity(intent)
+        }
+
     }
 
     override fun onResume() {
@@ -357,6 +409,8 @@ class MenuActivity : AppCompatActivity() {
                         showUpdatePopup()
                     } else if (alldata[1] == "1") {
                         showMaintaincePopup()
+                    } else {
+                        showJoinTgPopup()
                     }
 
                     Handler(Looper.getMainLooper()).postDelayed({
@@ -507,6 +561,45 @@ class MenuActivity : AppCompatActivity() {
 
     }
 
+    private fun showJoinTgPopup() {
+        AlertDialog.Builder(this, R.style.updateDialogTheme).setView(R.layout.popup_join_telegram)
+            .setCancelable(true).create().apply {
+                show()
+                findViewById<MaterialCardView>(R.id.cv_Join_Telegram)?.setOnClickListener {
+                    Utils.openUrl(
+                        this@MenuActivity,
+                        TinyDB.getString(this@MenuActivity, "telegram_link", "")!!
+                    )
+                    dismiss()
+                }
+            }
+
+    }
+
+    private fun showExchangePopup() {
+        AlertDialog.Builder(this, R.style.updateDialogTheme).setView(R.layout.popup_exchange_taps)
+            .setCancelable(true).create().apply {
+                show()
+                findViewById<TextView>(R.id.tv_value)?.text =
+                    TinyDB.getInt(this@MenuActivity, "total_score", 0).toString()
+                findViewById<TextView>(R.id.cv_exchanged_coin)?.text =
+                    (TinyDB.getInt(
+                        this@MenuActivity,
+                        "total_score",
+                        0
+                    ) / TinyDB.getString(this@MenuActivity, "balance_exchange_rate", "")!!
+                        .toInt()).toString() + " Flams"
+                findViewById<MaterialCardView>(R.id.cv_Exchange_Flams)?.setOnClickListener {
+                    exchangePoint(TinyDB.getInt(this@MenuActivity, "total_score", 0).toString())
+                    dismiss()
+                }
+                findViewById<MaterialCardView>(R.id.cv_close)?.setOnClickListener {
+                    dismiss()
+                }
+            }
+
+    }
+
     private fun updateAdMobAppId(adMobAppId: String) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -566,6 +659,7 @@ class MenuActivity : AppCompatActivity() {
 
         adLoader.loadAd(AdManagerAdRequest.Builder().build())
     }
+
     private val offerWallListener = object : OfferWallListener {
 
         override fun onOfferWallShowed() {
@@ -583,6 +677,90 @@ class MenuActivity : AppCompatActivity() {
         override fun onFailed(message: String) {
             Toast.makeText(this@MenuActivity, "No Offers Available", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun exchangePoint(coin: String) {
+        Utils.showLoadingPopUp(this)
+        if (coin.isEmpty()) {
+            Toast.makeText(this, "Enter Amount", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val deviceid: String = Settings.Secure.getString(
+            this.contentResolver, Settings.Secure.ANDROID_ID
+        )
+        val time = System.currentTimeMillis()
+
+        val url3 = "${Companions.siteUrl}exchange_point.php"
+        val email = TinyDB.getString(this, "email", "")
+
+        val queue3: RequestQueue = Volley.newRequestQueue(this)
+        val stringRequest = object : StringRequest(Method.POST, url3, { response ->
+
+            val yes = Base64.getDecoder().decode(response)
+            val res = String(yes, Charsets.UTF_8)
+
+            if (res.contains(",")) {
+                Utils.dismissLoadingPopUp()
+                val alldata = res.trim().split(",")
+
+                TinyDB.saveString(this, "balance", alldata[1])
+                Toast.makeText(this, alldata[0], Toast.LENGTH_SHORT).show()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    Utils.dismissLoadingPopUp()
+                    TinyDB.saveInt(this@MenuActivity, "total_score", 0)
+                    updateLimits()
+
+                }, 1000)
+
+            } else {
+                Toast.makeText(this, res, Toast.LENGTH_LONG).show()
+            }
+
+        }, { error ->
+            Utils.dismissLoadingPopUp()
+            Toast.makeText(this, "Internet Slow", Toast.LENGTH_SHORT).show()
+            // requireActivity().finish()
+        }) {
+            override fun getParams(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+
+                val dbit32 = videoplayyer.encrypt(deviceid, Hatbc()).toString()
+                val tbit32 = videoplayyer.encrypt(time.toString(), Hatbc()).toString()
+                val email = videoplayyer.encrypt(email.toString(), Hatbc()).toString()
+                val upi32 = videoplayyer.encrypt(coin.toString(), Hatbc()).toString()
+
+                val den64 = Base64.getEncoder().encodeToString(dbit32.toByteArray())
+                val ten64 = Base64.getEncoder().encodeToString(tbit32.toByteArray())
+                val email64 = Base64.getEncoder().encodeToString(email.toByteArray())
+                val upi64 = Base64.getEncoder().encodeToString(upi32.toByteArray())
+
+                val encodemap: MutableMap<String, String> = HashMap()
+                encodemap["deijvfijvmfhvfvhfbhbchbfybebd"] = den64
+                encodemap["waofhfuisgdtdrefssfgsgsgdhddgd"] = ten64
+                encodemap["fdvbdfbhbrthyjsafewwt5yt5"] = email64
+                encodemap["defsdfefsefwefwefewfwefvfvdfbdbd"] = upi64
+
+                val jason = Json.encodeToString(encodemap)
+
+                val den264 = Base64.getEncoder().encodeToString(jason.toByteArray())
+
+                val final = URLEncoder.encode(den264, StandardCharsets.UTF_8.toString())
+
+                params["dase"] = final
+
+                val encodedAppID = Base64.getEncoder().encodeToString(
+                    Companions.APP_ID.toString().toByteArray()
+                )
+                params["app_id"] = encodedAppID
+
+                return params
+            }
+        }
+
+        queue3.add(stringRequest)
+
+
     }
 
 }

@@ -21,7 +21,7 @@
             android:name=".Redeem_HistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".Successfully_WithdrawnActivity"
+            android:name=".SuccessfullyWithdrawnActivity"
             android:exported="false" />
         <activity
             android:name=".WithdrawalActivity"

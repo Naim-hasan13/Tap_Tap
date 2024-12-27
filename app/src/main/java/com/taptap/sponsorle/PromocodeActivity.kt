@@ -30,6 +30,7 @@ class PromocodeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPromocodeBinding
     private var redeemCode = ""
     lateinit var adRequest: AdManagerAdRequest
+
     init {
         System.loadLibrary("keys")
     }
@@ -52,12 +53,16 @@ class PromocodeActivity : AppCompatActivity() {
             if (redeemCode.isNotEmpty()) {
                 applyPromoCode()
             } else {
-                binding.etPromocodeCode.error="Enter Promocode"
+                binding.etPromocodeCode.error = "Enter Promocode"
             }
         }
-        adRequest= AdManagerAdRequest.Builder().build()
+        adRequest = AdManagerAdRequest.Builder().build()
         loadNativeAd()
+        binding.cvGetRedeeem.setOnClickListener {
+            Utils.openUrl(this, TinyDB.getString(this, "telegram_link", "")!!)
+        }
     }
+
     private fun loadNativeAd() {
         binding.bannerAdView.loadAd(adRequest)
         val adLoader = com.google.android.gms.ads.AdLoader.Builder(
@@ -103,7 +108,7 @@ class PromocodeActivity : AppCompatActivity() {
                     TinyDB.saveString(this, "coin_added", difference.toString())
                     startActivity(Intent(this, CreditedActivity::class.java))
                     Utils.dismissLoadingPopUp()
-
+                    finish()
                 } else {
                     Toast.makeText(this, res, Toast.LENGTH_LONG).show()
                 }

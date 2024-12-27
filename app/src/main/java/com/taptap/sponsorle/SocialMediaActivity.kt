@@ -221,10 +221,11 @@ class SocialMediaActivity : AppCompatActivity() {
                             TinyDB.saveString(this, "balance", alldata[1])
 
                        list.forEach {
-                           if(it.id == offer_id){
-                               it.complete = 1
+                           if (it.id==offer_id){
+                               setUpoffer(it.offer_title, it.offer_link, it.offer_coin, 1, it.id)
+                           }else{
+                               setUpoffer(it.offer_title, it.offer_link, it.offer_coin, 0, it.id)
                            }
-                           setUpoffer(it.offer_title, it.offer_link, it.offer_coin, it.complete, it.id)
                        }
                         } else {
                             Toast.makeText(this, res, Toast.LENGTH_SHORT).show()

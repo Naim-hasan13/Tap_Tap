@@ -119,7 +119,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp"
                     android:textAlignment="center"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:background="#00000000"
                     android:hint="Enter Promocode"
                     android:textStyle="bold" />

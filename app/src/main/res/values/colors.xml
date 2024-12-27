@@ -5,4 +5,7 @@
 
     <color name="hints">#757575</color>
     <color name="app_color">#1C1C84</color>
+    <color name="success" >#00a87b</color>
+    <color name="refunded" >#F95354</color>
+    <color name="pending" >#FFD550</color>
 </resources>

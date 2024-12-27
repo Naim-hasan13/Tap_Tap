@@ -2,20 +2,27 @@ package com.taptap.sponsorle
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.admanager.AdManagerAdRequest
 import com.google.android.gms.ads.admanager.AdManagerInterstitialAd
 import com.google.android.gms.ads.admanager.AdManagerInterstitialAdLoadCallback
+import com.google.android.material.card.MaterialCardView
 import com.taptap.sponsorle.databinding.ActivityAddWalletBinding
 import com.taptap.sponsorle.extrazz.AdmobX
 import com.taptap.sponsorle.extrazz.TinyDB
 import com.taptap.sponsorle.extrazz.Utils
+import kotlin.random.Random
 
 class Add_WalletActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddWalletBinding
@@ -33,14 +40,46 @@ class Add_WalletActivity : AppCompatActivity() {
             insetsController?.isAppearanceLightStatusBars = true
             insets
         }
+        MobileAds.initialize(this) {
+
+        }
         adRequest = AdManagerAdRequest.Builder().build()
         loadNativeAd()
         binding.tvContinue.setOnClickListener {
-            Utils.showLoadingPopUp(this)
-            loadInterstitial()
+            binding.tvContinue.visibility= View.GONE
+            binding.outerCardView.visibility= View.VISIBLE
+            binding.outerCardView.post {
+                animateProgress(binding.innerCardView, binding.outerCardView.width, Random.nextLong(4000,10000))
+            }
         }
     }
+    private fun animateProgress(
+        cardView: MaterialCardView,
+        finalWidth: Int,
+        duration: Long,
+    ) {
+        val startWidth = 0
+        val layoutParams = cardView.layoutParams as ViewGroup.LayoutParams
 
+        val handler = Handler(Looper.getMainLooper())
+        val startTime = System.currentTimeMillis()
+
+        handler.post(object : Runnable {
+            override fun run() {
+                val elapsedTime = System.currentTimeMillis() - startTime
+                val progress = elapsedTime.toFloat() / duration
+                layoutParams.width = (startWidth + (finalWidth * progress)).toInt()
+                cardView.layoutParams = layoutParams
+
+                if (progress < 1.0f) {
+                    handler.postDelayed(this, 16)
+                } else {
+                    Utils.showLoadingPopUp(this@Add_WalletActivity)
+                    loadInterstitial()
+                }
+            }
+        })
+    }
     override fun onBackPressed() {
         Toast.makeText(this, "Click on continue", Toast.LENGTH_SHORT).show()
     }
@@ -95,4 +134,5 @@ class Add_WalletActivity : AppCompatActivity() {
             }
         )
     }
+
 }

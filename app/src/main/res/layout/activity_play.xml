@@ -60,7 +60,7 @@
         android:text="0"
         android:visibility="gone"
         android:textColor="@color/black"
-        android:textSize="@dimen/_68ssp"
+        android:textSize="@dimen/_100ssp"
         android:textStyle="bold" />
 
     <LinearLayout

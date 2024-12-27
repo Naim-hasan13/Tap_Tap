@@ -41,3 +41,7 @@
     public <init>(android.content.Context, java.lang.String, java.lang.String, kotlin.jvm.functions.Function0);
     *;
 }
+# Please add these rules to your existing keep rules in order to suppress warnings.
+# This is generated automatically by the Android Gradle plugin.
+-dontwarn android.media.LoudnessCodecController$OnLoudnessCodecUpdateListener
+-dontwarn android.media.LoudnessCodecController

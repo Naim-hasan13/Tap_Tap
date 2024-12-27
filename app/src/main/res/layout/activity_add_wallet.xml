@@ -139,6 +139,41 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/outerCardView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:visibility="gone"
+            app:cardBackgroundColor="#AFA3FF"
+            app:cardCornerRadius="@dimen/_18sdp"
+            app:strokeColor="@color/white"
+            app:strokeWidth="0dp">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:elevation="@dimen/_1sdp"
+                android:text="Please wait..."
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold" />
+            <!-- Inner CardView representing the progress -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/innerCardView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                app:cardBackgroundColor="#644bf6"
+                app:cardCornerRadius="18dp"
+                app:strokeColor="#50a2f1"
+                app:strokeWidth="0dp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/tv_continue"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"

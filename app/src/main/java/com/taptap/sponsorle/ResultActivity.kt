@@ -11,15 +11,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.admanager.AdManagerAdRequest
 import com.google.android.gms.ads.admanager.AdManagerInterstitialAd
 import com.google.android.gms.ads.admanager.AdManagerInterstitialAdLoadCallback
+import com.google.android.gms.ads.rewarded.RewardedAd
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.google.android.material.card.MaterialCardView
 import com.taptap.sponsorle.extrazz.TinyDB
 import com.taptap.sponsorle.extrazz.Utils
 
 class ResultActivity : AppCompatActivity() {
     private var mAdManagerInterstitialAd: AdManagerInterstitialAd? = null
+    private var rewardedAd: RewardedAd? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,43 +56,45 @@ class ResultActivity : AppCompatActivity() {
 
     private fun loadInterstitial() {
         val adRequest = AdManagerAdRequest.Builder().build()
-        AdManagerInterstitialAd.load(
+
+        RewardedAd.load(
             this,
-            getString(R.string.interstitial_id),
+            getString(R.string.rewarded),
             adRequest,
-            object : AdManagerInterstitialAdLoadCallback() {
-                override fun onAdFailedToLoad(adError: com.google.android.gms.ads.LoadAdError) {
-                    adError.toString().let { Log.d("AdMob", it) }
-                    mAdManagerInterstitialAd = null
+            object : RewardedAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    rewardedAd = null
                     loadInterstitial()
                 }
 
-                override fun onAdLoaded(interstitialAd: AdManagerInterstitialAd) {
-                    Log.d("AdMob", "Ad was loaded.")
-                    mAdManagerInterstitialAd = interstitialAd
-                    Utils.dismissLoadingPopUp()
-                    mAdManagerInterstitialAd?.fullScreenContentCallback =
-                        object : FullScreenContentCallback() {
-                            override fun onAdDismissedFullScreenContent() {
-                                mAdManagerInterstitialAd = null
-                                val score=TinyDB.getInt(this@ResultActivity, "score", 0)*2
-                                TinyDB.saveInt(this@ResultActivity, "total_score", TinyDB.getInt(this@ResultActivity, "total_score", 0)-TinyDB.getInt(this@ResultActivity, "score", 0) + score)
-                                val heightScore = TinyDB.getInt(this@ResultActivity, "high", 0)
-                                if (heightScore < score) {
-                                    TinyDB.saveInt(this@ResultActivity, "high", score)
+                override fun onAdLoaded(ad: RewardedAd) {
+                    rewardedAd = ad
+                    rewardedAd?.let { ad ->
+                        Utils.dismissLoadingPopUp()
+                        ad.show(this@ResultActivity) { rewardItem ->
+                            ad.fullScreenContentCallback = object : FullScreenContentCallback() {
+                                override fun onAdDismissedFullScreenContent() {
+                                    super.onAdDismissedFullScreenContent()
+                                    val score=TinyDB.getInt(this@ResultActivity, "score", 0)*2
+                                    TinyDB.saveInt(this@ResultActivity, "total_score", TinyDB.getInt(this@ResultActivity, "total_score", 0)-TinyDB.getInt(this@ResultActivity, "score", 0) + score)
+                                    val heightScore = TinyDB.getInt(this@ResultActivity, "high", 0)
+                                    if (heightScore < score) {
+                                        TinyDB.saveInt(this@ResultActivity, "high", score)
+                                    }
+                                    Toast.makeText(this@ResultActivity, "2x Score Added", Toast.LENGTH_SHORT)
+                                        .show()
+                                    finish()
+
                                 }
-                                Toast.makeText(this@ResultActivity, "2x Score Added", Toast.LENGTH_SHORT)
-                                    .show()
-                                finish()
-
                             }
-
                         }
-                    mAdManagerInterstitialAd?.show(this@ResultActivity)
+                    } ?: run {
+                        loadInterstitial()
+                    }
 
                 }
-            }
-        )
+            })
+
     }
 
 
